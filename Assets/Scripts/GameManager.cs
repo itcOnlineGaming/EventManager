@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using Mono.Cecil.Cil;
 using UnityEngine;
 
+
 public class GameManager : MonoBehaviour
 {
-    void Start()
-    {
-    }
 
     void Update()
     {
@@ -15,7 +13,7 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Debug.Log("Space pressed");
-            EventManager.Instance.RaiseEvent(GameEventType.ScoreUpdated, 100);
+            EventManager.Instance.RaiseEvent(GameEvent.ScoreUpdated, 100);
         }
     }
 }

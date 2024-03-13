@@ -3,17 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum GameEventType
-{
-    ScoreUpdated,
-    PlayerHealthChanged,
-    EnemyDefeated,
-    // Add more events as needed
-}
-
 public class EventManager : MonoBehaviour
 {
-    private Dictionary<GameEventType, Action<int>> eventDictionary = new Dictionary<GameEventType, Action<int>>();
+    private Dictionary<string, Action<int>> eventDictionary = new Dictionary<string, Action<int>>();
 
     public static EventManager _instance;
     
@@ -40,7 +32,7 @@ public class EventManager : MonoBehaviour
         }
     }
 
-    public void Subscribe(GameEventType eventType, Action<int> listener)
+    public void Subscribe(string eventType, Action<int> listener)
     {
         if (!eventDictionary.ContainsKey(eventType))
         {
@@ -52,7 +44,7 @@ public class EventManager : MonoBehaviour
         }
     }
 
-    public void Unsubscribe(GameEventType eventType, Action<int> listener)
+    public void Unsubscribe(string eventType, Action<int> listener)
     {
         if (eventDictionary.ContainsKey(eventType))
         {
@@ -60,7 +52,7 @@ public class EventManager : MonoBehaviour
         }
     }
 
-    public void RaiseEvent(GameEventType eventType, int param)
+    public void RaiseEvent(string eventType, int param)
     {
         if (eventDictionary.ContainsKey(eventType))
         {
