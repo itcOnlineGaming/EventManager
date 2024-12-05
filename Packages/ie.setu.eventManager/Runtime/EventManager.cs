@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class EventManager : MonoBehaviour
 {
-    private Dictionary<string, Action<int>> eventDictionary = new Dictionary<string, Action<int>>();
+    private Dictionary<string, Action<int, string>> eventDictionary = new Dictionary<string, Action<int, string>>();
 
     public static EventManager _instance;
     
@@ -32,7 +32,7 @@ public class EventManager : MonoBehaviour
         }
     }
 
-    public void Subscribe(string eventType, Action<int> listener)
+    public void Subscribe(string eventType, Action<int, string> listener)
     {
         if (!eventDictionary.ContainsKey(eventType))
         {
@@ -44,7 +44,7 @@ public class EventManager : MonoBehaviour
         }
     }
 
-    public void Unsubscribe(string eventType, Action<int> listener)
+    public void Unsubscribe(string eventType, Action<int, string> listener)
     {
         if (eventDictionary.ContainsKey(eventType))
         {
@@ -52,11 +52,11 @@ public class EventManager : MonoBehaviour
         }
     }
 
-    public void RaiseEvent(string eventType, int param)
+    public void RaiseEvent(string eventType, int param1, string param2)
     {
         if (eventDictionary.ContainsKey(eventType))
         {
-            eventDictionary[eventType]?.Invoke(param);
+            eventDictionary[eventType]?.Invoke(param1, param2);
         }
     }
 }
